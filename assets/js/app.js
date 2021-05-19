@@ -17,8 +17,38 @@ import {Socket} from "phoenix"
 import NProgress from "nprogress"
 import {LiveSocket} from "phoenix_live_view"
 
+let Hooks = {}
+Hooks.CanvasHook = {
+  mounted() {
+    window.addEventListener("keydown", e => {
+      let key;
+      switch (e.code) {
+        case "KeyS":
+        case "ArrowDown":
+          key = 's';
+          break;
+        case "KeyW":
+        case "ArrowUp":
+          key = 'w';
+          break;
+        case "KeyD":
+        case "ArrowRight":
+          key = 'd';
+          break;
+        case "KeyA":
+        case "ArrowLeft":
+          key = 'a';
+          break;
+        default:
+          return;
+      }
+      this.pushEvent("move", {key: key})
+    });
+  }
+}
+
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}})
+let liveSocket = new LiveSocket("/live", Socket, {hooks: Hooks, params: {_csrf_token: csrfToken}})
 
 // Show progress bar on live navigation and form submits
 window.addEventListener("phx:page-loading-start", info => NProgress.start())
