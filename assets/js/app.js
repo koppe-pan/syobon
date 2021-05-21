@@ -23,10 +23,6 @@ Hooks.CanvasHook = {
     window.addEventListener("keydown", e => {
       let key;
       switch (e.code) {
-        case "KeyS":
-        case "ArrowDown":
-          key = 's';
-          break;
         case "KeyW":
         case "ArrowUp":
           key = 'w';

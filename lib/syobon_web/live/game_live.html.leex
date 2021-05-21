@@ -1,3 +1,4 @@
 <svg id="main_canvas" width="<%= @width %>" height="<%= @height %>" phx-hook="CanvasHook">
+  <text x="<%= @width - 32 %>" y="32"><%= round(@time) %></text>
   <circle cx="<%= @me.x %>px" cy="<%= @me.y %>px" r="10" fill="blue"></circle>
 </svg>
